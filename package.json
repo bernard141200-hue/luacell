@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "name": "luacell",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bernard141200-hue/luacell.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bernard141200-hue/luacell/issues"
+  },
+  "homepage": "https://github.com/bernard141200-hue/luacell#readme"
+}

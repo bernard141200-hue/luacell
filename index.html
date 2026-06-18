@@ -3,106 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lua Cell | Smartphones e Assistência</title>
+    <title>Lua Cell | iPhones, Acessórios e Assistência</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght=400;600;700&family=Nunito:wght=400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-    --primary-blue: #0A5A73;
-    --secondary-blue: #0C6B86;
-    --silver: #D9E2E8;
-    --silver-dark: #AAB8C2;
-    --white: #FFFFFF;
-    --text-main: #1E293B;
-    --space-dark: #0A5A73;
-    --moon-yellow: #D9E2E8;
-    --slate-gray: #6B7C89;
-    --accent-blue: #0C6B86;
-}
+            --space-dark: #0b0f19; 
+            --moon-yellow: #f59e0b; 
+            --slate-gray: #64748b;
+            --silver: #f8fafc; 
+            --white: #ffffff; 
+            --text-main: #1e293b; 
+            --accent-blue: #3b82f6;
+        }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--silver); color: var(--text-main); font-family: 'Nunito', sans-serif; overflow-x: hidden; }
-        h1, h2, h3, .logo, .btn, .product-price, .total-box { font-family: 'Fredoka', sans-serif; }
+        h1, h2, h3, .logo-txt, .btn, .product-price, .total-box { font-family: 'Fredoka', sans-serif; }
 
         .top-bar { background: var(--space-dark); color: var(--white); text-align: center; padding: 8px; font-size: 13px; font-weight: 600; border-bottom: 2px solid var(--moon-yellow); }
 
+        /* Header Responsivo */
         header { 
             position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); 
-            display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; 
+            display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; 
             box-shadow: 0 4px 20px rgba(0,0,0,0.05); z-index: 100; 
         }
         
-        .logo { font-size: 32px; font-weight: 700; text-decoration: none; color: var(--space-dark); }
-        .logo span { color: var(--moon-yellow); }
+        .logo-container { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .logo-img { height: 42px; width: 42px; border-radius: 50%; border: 2px solid var(--moon-yellow); object-fit: cover; }
+        .logo-txt { font-size: 20px; font-weight: 700; color: var(--space-dark); }
+        .logo-txt span { color: var(--moon-yellow); }
 
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-main); margin: 0 15px; font-size: 16px; font-weight: 700; }
+        .nav-right-area { display: flex; align-items: center; gap: 10px; }
+
+        .nav-links { display: flex; align-items: center; gap: 15px; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-size: 15px; font-weight: 700; transition: 0.2s; }
         .nav-links a:hover { color: var(--accent-blue); }
         
-        .user-badge { background: var(--space-dark); color: white; padding: 8px 18px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 14px; margin-left: 10px; cursor: pointer; border: 1px solid var(--moon-yellow); }
+        .user-badge { background: var(--space-dark); color: white; padding: 8px 14px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 13px; cursor: pointer; border: 1px solid var(--moon-yellow); white-space: nowrap; display: inline-block; }
+        .btn-admin-nav { background: var(--moon-yellow); color: var(--space-dark) !important; padding: 6px 12px; border-radius: 8px; font-size: 13px !important; font-weight: 700; text-decoration: none; display: inline-block; }
 
         .cart-icon-container { 
             position: relative; cursor: pointer; display: flex; align-items: center; background: var(--white);
-            padding: 12px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); color: var(--space-dark); transition: 0.2s; margin-left: 15px;
+            padding: 10px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); color: var(--space-dark); transition: 0.2s;
         }
-        .cart-icon-container:hover { transform: scale(1.05); color: var(--accent-blue); }
-        .cart-count { position: absolute; top: -5px; right: -5px; background: var(--accent-blue); color: white; font-size: 12px; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fredoka', sans-serif; }
+        .cart-count { position: absolute; top: -5px; right: -5px; background: var(--accent-blue); color: white; font-size: 11px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fredoka', sans-serif; }
 
-        .hero { text-align: center; padding: 60px 20px; background: var(--space-dark); color: var(--white); border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); margin-bottom: 40px; }
-        .hero h1 { font-size: 46px; margin-bottom: 15px; }
+        /* Hero adaptável para Mobile e PC */
+        .hero { text-align: center; padding: 50px 20px; background: var(--space-dark); color: var(--white); border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); margin-bottom: 30px; }
+        .hero h1 { font-size: 32px; margin-bottom: 15px; line-height: 1.2; }
         .hero h1 span { color: var(--moon-yellow); }
-        .hero p { font-size: 18px; color: #cbd5e1; max-width: 600px; margin: 0 auto 30px auto; }
+        .hero p { font-size: 15px; color: #cbd5e1; max-width: 600px; margin: 0 auto 25px auto; }
         
-        .btn { display: inline-block; background: var(--accent-blue); color: white; text-decoration: none; padding: 14px 32px; border-radius: 16px; font-size: 18px; transition: 0.2s; border: none; cursor: pointer; font-weight: 600; }
-        .btn:hover { background: #1d4ed8; transform: translateY(-2px); }
-        .btn-assist { background: transparent; border: 2px solid var(--moon-yellow); color: var(--moon-yellow); margin-left: 10px; }
+        .hero-buttons { display: flex; flex-direction: column; gap: 10px; justify-content: center; align-items: center; }
+        .btn { display: inline-block; background: var(--accent-blue); color: white; text-decoration: none; padding: 12px 28px; border-radius: 14px; font-size: 16px; transition: 0.2s; border: none; cursor: pointer; font-weight: 600; width: 100%; max-width: 250px; text-align: center; }
+        .btn-assist { background: transparent; border: 2px solid var(--moon-yellow); color: var(--moon-yellow); }
         .btn-assist:hover { background: var(--moon-yellow); color: var(--space-dark); }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px 40px 60px 40px; }
-        .section-title { font-size: 32px; color: var(--space-dark); text-align: center; margin-bottom: 40px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 10px 15px 40px 15px; }
+        .section-title { font-size: 22px; color: var(--space-dark); margin: 30px 0 15px 0; border-left: 5px solid var(--moon-yellow); padding-left: 12px; }
 
-        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
-        .product-card { background: var(--white); padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); text-align: center; display: flex; flex-direction: column; transition: transform 0.3s; border: 1px solid #e2e8f0; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        /* Grid Inteligente de Produtos */
+        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+        .product-card { background: var(--white); padding: 12px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); text-align: center; display: flex; flex-direction: column; border: 1px solid #e2e8f0; }
         
-        .img-wrapper { background: var(--silver); width: 100%; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; margin-bottom: 15px; }
+        .img-wrapper { background: var(--silver); width: 100%; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
         .product-card img { width: 100%; height: 100%; object-fit: cover; }
+        .product-name { font-size: 14px; font-weight: 700; color: var(--text-main); line-height: 1.3; height: 38px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .product-meta { font-size: 12px; color: var(--slate-gray); margin: 4px 0; }
+        .product-price { font-size: 17px; color: var(--space-dark); margin-bottom: 10px; font-weight: 700; }
+        
+        .btn-add-cart { background: var(--space-dark); color: var(--white); width: 100%; border-radius: 10px; font-size: 14px; padding: 10px; margin-top: auto; border: none; cursor: pointer; font-family: 'Fredoka'; }
 
-        .product-name { font-size: 18px; font-weight: 700; color: var(--text-main); }
-        .product-meta { font-size: 14px; color: var(--slate-gray); margin: 5px 0; }
-        .product-price { font-size: 22px; color: var(--space-dark); margin-bottom: 15px; font-weight: 700; }
+        /* Carrinho Lateral Responsivo */
+        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100vh; background: var(--white); box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 200; transition: 0.3s ease; padding: 20px; display: flex; flex-direction: column; }
+        .cart-sidebar.open { right: 0; }
         
-        .btn-add-cart { background: var(--space-dark); color: var(--white); width: 100%; border-radius: 12px; font-size: 16px; padding: 12px; margin-top: auto; border: none; cursor: pointer; font-family: 'Fredoka'; }
-        .btn-add-cart:hover { background: var(--accent-blue); }
-        .btn-add-cart:disabled { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; }
+        /* Regras para Computador (PC) */
+        @media (min-width: 768px) {
+            header { padding: 15px 40px; }
+            .logo-img { height: 50px; width: 50px; }
+            .logo-txt { font-size: 26px; }
+            .hero { padding: 60px 20px; }
+            .hero h1 { font-size: 46px; }
+            .hero p { font-size: 18px; }
+            .hero-buttons { flex-direction: row; gap: 15px; }
+            .grid-produtos { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
+            .product-card { padding: 20px; }
+            .product-name { font-size: 17px; height: auto; display: block; }
+            .product-price { font-size: 22px; }
+        }
 
-        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; background: var(--white); box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 200; transition: transform 0.4s ease; padding: 30px; display: flex; flex-direction: column; }
-        .cart-sidebar.open { transform: translateX(-400px); }
-        
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #cbd5e1; padding-bottom: 20px; margin-bottom: 20px; }
-        .cart-header h2 { color: var(--space-dark); font-size: 24px; }
-        .close-cart { font-size: 28px; cursor: pointer; background: none; border: none; color: var(--text-main); }
-        
-        .cart-items-list { flex: 1; overflow-y: auto; }
-        .cart-item { display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
-        .cart-item img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; }
-        .cart-item-details { flex: 1; }
-        .cart-item-title { font-weight: 700; font-size: 15px; }
-        .btn-remove { background: none; border: none; color: #ef4444; font-size: 13px; cursor: pointer; text-decoration: underline; margin-top: 5px; }
-        .cart-item-price { font-family: 'Fredoka'; color: var(--accent-blue); font-size: 16px; }
-        
-        .cart-footer { padding-top: 20px; }
-        .total-box { display: flex; justify-content: space-between; font-size: 22px; color: var(--text-main); margin-bottom: 20px; }
-        .btn-checkout { background: var(--accent-blue); width: 100%; font-size: 18px; }
-        .btn-checkout:hover { background: #1d4ed8; }
-        
+        /* Regras para Telemóvel (Esconde apenas links institucionais, mantendo a autenticação ativa) */
+        @media (max-width: 767px) {
+            .nav-links { display: none; } 
+        }
+
         .overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.6); z-index: 150; display: none; backdrop-filter: blur(4px); }
         .overlay.active { display: block; }
-
-        .user-profile-menu { display: flex; align-items: center; gap: 10px; background: var(--white); padding: 5px 15px 5px 5px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; border: 1px solid #e2e8f0; }
-        .user-avatar { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; }
-        .user-name-title { font-size: 14px; font-weight: 700; color: var(--text-main); }
-
+        .user-profile-menu { display: flex; align-items: center; gap: 6px; background: var(--white); padding: 4px; border-radius: 12px; border: 1px solid #e2e8f0; cursor: pointer; }
+        .user-avatar { width: 30px; height: 30px; border-radius: 8px; object-fit: cover; }
+        .user-name-title { font-size: 12px; font-weight: 700; display: none; }
+        @media (min-width: 400px) { .user-name-title { display: inline; } }
         .account-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--white); padding: 30px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); z-index: 300; width: 90%; max-width: 400px; text-align: center; }
         .account-modal.active { display: block; }
         .account-modal img { width: 80px; height: 80px; border-radius: 16px; margin-bottom: 15px; border: 3px solid var(--moon-yellow); object-fit: cover; }
@@ -110,31 +113,48 @@
 </head>
 <body>
 
-    <div class="top-bar">Smartphones, Acessórios Premium e Assistência Autorizada 🌙</div>
+    <div class="top-bar">iPhones Premium, Acessórios e Assistência Especializada 🌙</div>
 
     <header>
-        <a href="#" class="logo"><img src="luacell.jpeg" alt="Lua Cell" style="height:70px;"></a>
+        <a href="#" class="logo-container">
+            <img class="logo-img" src="luacell.jpeg" alt="Lua Cell Logo">
+            <div class="logo-txt">Lua <span>Cell</span></div>
+        </a>
+        
         <nav class="nav-links">
-            <a href="#vitrine">Vitrine</a>
-            <a href="#" onclick="solicitarAssistencia()">Orçamento Técnico</a>
-            <div id="auth-area" style="display: flex; align-items: center; gap: 10px;"></div>
+            <a href="#categoria-iphones">iPhones</a>
+            <a href="#categoria-acessorios">Acessórios</a>
+            <a href="#categoria-assistencia">Assistência</a>
         </nav>
-        <div class="cart-icon-container" onclick="toggleCart(true)">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-            <span class="cart-count" id="global-cart-count">0</span>
+
+        <div class="nav-right-area">
+            <div id="auth-area" style="display: flex; align-items: center; gap: 8px;"></div>
+            
+            <div class="cart-icon-container" onclick="toggleCart(true)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span class="cart-count" id="global-cart-count">0</span>
+            </div>
         </div>
     </header>
 
     <section class="hero">
-        <h1>🌙 Lua Cell <span>Tecnologia & Conectividade</span></h1>
-        <p>Smartphones, acessórios premium e assistência técnica especializada para manter você sempre conectado.</p>
-        <a href="#vitrine" class="btn">Ver Catálogo</a>
-        <button onclick="solicitarAssistencia()" class="btn btn-assist">Chamar Suporte</button>
+        <h1>Sua Loja de Celulares Completa <span>Lua Cell</span></h1>
+        <p>Venda de iPhones novos e seminovos, linha completa de acessórios e manutenção técnica com garantia.</p>
+        <div class="hero-buttons">
+            <a href="#categoria-iphones" class="btn">Comprar iPhone</a>
+            <button onclick="solicitarAssistencia()" class="btn btn-assist">Orçamento Técnico</button>
+        </div>
     </section>
 
-    <main class="container" id="vitrine">
-        <h2 class="section-title">Disponíveis em Loja 📱</h2>
-        <div class="grid-produtos" id="lista-produtos"></div>
+    <main class="container">
+        <h2 class="section-title" id="categoria-iphones">Venda de iPhones 📱</h2>
+        <div class="grid-produtos" id="lista-iphones"></div>
+
+        <h2 class="section-title" id="categoria-acessorios">Acessórios em Geral 🎧</h2>
+        <div class="grid-produtos" id="lista-acessorios"></div>
+
+        <h2 class="section-title" id="categoria-assistencia">Manutenção & Assistência Técnica 🛠️</h2>
+        <div class="grid-produtos" id="lista-assistencia"></div>
     </main>
 
     <div class="overlay" id="cart-overlay" onclick="fecharTodosModais()"></div>
@@ -160,15 +180,16 @@
         <h2 id="conta-nome" style="font-size: 20px; margin-bottom: 5px;"></h2>
         <p id="conta-email" style="color: var(--slate-gray); font-size: 13px; margin-bottom: 5px;"></p>
         <p id="conta-telefone" style="color: var(--accent-blue); font-size: 14px; font-weight: bold; margin-bottom: 25px;"></p>
-
         <div style="display: flex; gap: 10px; justify-content: center;">
-            <button class="btn" style="background: #cbd5e1; color: var(--text-main); padding: 8px 15px; font-size: 14px; border-radius: 10px;" onclick="fecharModalConta()">Fechar</button>
-            <button class="btn" style="background: #ef4444; padding: 8px 15px; font-size: 14px; border-radius: 10px;" onclick="fazerLogout()">Sair da Conta 🚪</button>
+            <button class="btn" style="background: #cbd5e1; color: var(--text-main); padding: 8px 15px; font-size: 14px;" onclick="fecharModalConta()">Fechar</button>
+            <button class="btn" style="background: #ef4444; padding: 8px 15px; font-size: 14px;" onclick="fazerLogout()">Sair 🚪</button>
         </div>
     </div>
 
     <script>
         const WHATSAPP_LOJA = "5583999208090"; 
+        const EMAILS_ADMINS = ["bernard141200@gmail.com", "luammasilva6@gmail.com"];
+        
         let carrinho = JSON.parse(sessionStorage.getItem('nuvee_cart')) || [];
         let produtosDoBanco = [];
         let usuarioLogado = null;
@@ -192,7 +213,13 @@
             const checkoutBtn = document.getElementById('checkout-action-btn');
 
             if (usuarioLogado) {
+                let adminButtonHTML = "";
+                if (EMAILS_ADMINS.includes(usuarioLogado.email.toLowerCase())) {
+                    adminButtonHTML = `<a href="/admin.html" class="btn-admin-nav">Admin ⚙️</a>`;
+                }
+
                 authArea.innerHTML = `
+                    ${adminButtonHTML}
                     <div class="user-profile-menu" onclick="abrirModalConta()">
                         <img class="user-avatar" src="${usuarioLogado.foto}" alt="Avatar">
                         <span class="user-name-title">${usuarioLogado.nome.split(' ')[0]} ✨</span>
@@ -201,16 +228,13 @@
                 checkoutBtn.innerText = "Confirmar Pedido";
                 checkoutBtn.style.background = "var(--accent-blue)";
             } else {
-                authArea.innerHTML = `<a href="/login.html" class="user-badge">Entrar / Cadastrar</a>`;
+                authArea.innerHTML = `<a href="/login.html" class="user-badge">Entrar</a>`;
                 checkoutBtn.innerText = "Fazer Login para Comprar 🔒";
                 checkoutBtn.style.background = "var(--slate-gray)";
             }
         }
 
-        function fazerLogout() {
-            sessionStorage.removeItem('nuvee_user');
-            window.location.reload();
-        }
+        function fazerLogout() { sessionStorage.removeItem('nuvee_user'); window.location.reload(); }
 
         function abrirModalConta() {
             if (!usuarioLogado) return;
@@ -218,44 +242,46 @@
             document.getElementById('conta-nome').innerText = usuarioLogado.nome;
             document.getElementById('conta-email').innerText = usuarioLogado.email;
             document.getElementById('conta-telefone').innerText = "WhatsApp: " + usuarioLogado.telefone;
-            
             document.getElementById('modal-conta').classList.add('active');
             document.getElementById('cart-overlay').classList.add('active');
         }
 
-        function fecharModalConta() {
-            document.getElementById('modal-conta').classList.remove('active');
-            document.getElementById('cart-overlay').classList.remove('active');
-        }
+        function fecharModalConta() { document.getElementById('modal-conta').classList.remove('active'); document.getElementById('cart-overlay').classList.remove('active'); }
 
         function carregarProdutos() {
-            // Requisição para a rota correta do celular
             fetch('/api/produtos')
                 .then(res => res.json())
                 .then(produtos => {
                     produtosDoBanco = produtos;
-                    exibirProdutos();
+                    exibirProdutosSeparados();
                 })
-                .catch(() => {
-                    alert("Aviso: Servidor local não conectado. Mostrando produtos offline.");
-                });
+                .catch(() => { console.log("Erro ao carregar banco do servidor."); });
         }
 
-        function exibirProdutos() {
-            const container = document.getElementById('lista-produtos');
-            container.innerHTML = '';
+        function exibirProdutosSeparados() {
+            const containerIphones = document.getElementById('lista-iphones');
+            const containerAcessorios = document.getElementById('lista-acessorios');
+            const containerAssistencia = document.getElementById('lista-assistencia');
+
+            containerIphones.innerHTML = '';
+            containerAcessorios.innerHTML = '';
+            containerAssistencia.innerHTML = '';
             
             produtosDoBanco.forEach((p) => {
                 const esgotado = p.quantidade <= 0;
-                container.innerHTML += `
+                const cardHTML = `
                     <div class="product-card">
                         <div class="img-wrapper"><img src="${p.imagem}" alt="${p.nome}"></div>
                         <div class="product-name">${p.nome}</div>
-                        <div class="product-meta">${p.tamanho} | Restam: ${p.quantidade} un</div>
+                        <div class="product-meta">${p.tamanho}</div>
                         <div class="product-price">R$ ${p.preco.toFixed(2)}</div>
                         ${esgotado ? `<button class="btn btn-add-cart" disabled>Esgotado</button>` : `<button class="btn btn-add-cart" onclick="adicionarAoCarrinho(${p.id})">Adicionar</button>`}
                     </div>
                 `;
+
+                if(p.categoria === 'iphones') containerIphones.innerHTML += cardHTML;
+                else if(p.categoria === 'acessorios') containerAcessorios.innerHTML += cardHTML;
+                else if(p.categoria === 'assistencia') containerAssistencia.innerHTML += cardHTML;
             });
             atualizarInterfaceCarrinho();
         }
@@ -267,7 +293,7 @@
             const item = carrinho.find(i => i.id === id);
             if (item) {
                 if (item.qtd_desejada < produto.quantidade) item.qtd_desejada++;
-                else return alert("Quantidade máxima em estoque atingida!");
+                else return alert("Fim do estoque disponível!");
             } else {
                 carrinho.push({ ...produto, qtd_desejada: 1 });
             }
@@ -287,7 +313,6 @@
             const list = document.getElementById('itens-da-sacola');
             const totalCount = document.getElementById('global-cart-count');
             const subtotal = document.getElementById('cart-subtotal');
-            
             list.innerHTML = '';
             let totalItens = 0; let totalValor = 0;
 
@@ -306,20 +331,14 @@
                     </div>
                 `;
             });
-
             totalCount.innerText = totalItens;
             subtotal.innerText = `R$ ${totalValor.toFixed(2)}`;
         }
 
         function gerenciarCheckout() {
             atualizarDadosUsuario();
-            if (!usuarioLogado) {
-                alert("Para fazer um pedido, entre com sua conta Google!");
-                window.location.href = "/login.html";
-                return;
-            }
-
-            if (carrinho.length === 0) return alert("Carrinho vazio!");
+            if (!usuarioLogado) { alert("Entre na sua conta para fazer o pedido!"); window.location.href = "/login.html"; return; }
+            if (carrinho.length === 0) return alert("Adicione produtos!");
 
             let totalPedido = carrinho.reduce((t, i) => t + (i.preco * i.qtd_desejada), 0);
             let resumoProdutos = carrinho.map(i => `- ${i.nome} x${i.qtd_desejada}`).join('\n');
@@ -327,11 +346,7 @@
             fetch('/api/pedidos', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    cliente: usuarioLogado,
-                    itens: carrinho,
-                    total: totalPedido.toFixed(2)
-                })
+                body: JSON.stringify({ cliente: usuarioLogado, itens: carrinho, total: totalPedido.toFixed(2) })
             })
             .then(res => res.json())
             .then(dadosAtualizados => {
@@ -339,25 +354,20 @@
                 
                 let textoMensagem = `🌙 *Novo Pedido - Lua Cell* 🌙\n\n`;
                 textoMensagem += `👤 *Cliente:* ${usuarioLogado.nome}\n`;
-                textoMensagem += `📞 *WhatsApp:* ${usuarioLogado.telefone}\n\n`;
-                textoMensagem += `📦 *Itens Escolhidos:*\n${resumoProdutos}\n\n`;
-                textoMensagem += `💰 *Valor Total:* R$ ${totalPedido.toFixed(2)}\n\n`;
-                textoMensagem += `Olá! Fechei meu carrinho pelo site e aguardo retorno sobre a retirada ou entrega! 🚀`;
+                textoMensagem += `📦 *Itens:*\n${resumoProdutos}\n\n`;
+                textoMensagem += `💰 *Total:* R$ ${totalPedido.toFixed(2)}`;
 
                 window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_LOJA}&text=${encodeURIComponent(textoMensagem)}`, '_blank');
-                
-                carrinho = []; 
-                sessionStorage.removeItem('nuvee_cart');
-                toggleCart(false); 
-                exibirProdutos(); 
+                carrinho = []; sessionStorage.removeItem('nuvee_cart');
+                toggleCart(false); exibirProdutosSeparados(); 
             })
-            .catch(() => { alert("Falha de conexão com o servidor local."); });
+            .catch(() => { alert("Erro ao concluir faturamento local."); });
         }
 
         function solicitarAssistencia() {
             atualizarDadosUsuario();
             let ident = usuarioLogado ? `Me chamo ${usuarioLogado.nome}` : "Olá";
-            let msg = `🌙 *Suporte Técnico Lua Cell* 🌙\n\n${ident} e preciso de um orçamento de manutenção/assistência para o meu celular!`;
+            let msg = `🌙 *Assistência Técnica Lua Cell* 🌙\n\n${ident} e preciso de um orçamento/reparo para o meu aparelho celular!`;
             window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_LOJA}&text=${encodeURIComponent(msg)}`, '_blank');
         }
 
